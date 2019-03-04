@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Light2D;
 using UnityEngine;
+using UnityEditor;
 using Random = UnityEngine.Random;
 
 
@@ -251,7 +252,7 @@ namespace Light2D.Examples
             blockMesh.uv = _uvs.ToArray();
             blockMesh.triangles = _triangles.ToArray();
             blockMesh.RecalculateBounds();
-            blockMesh.Optimize();
+            MeshUtility.Optimize(blockMesh);
 
             var meshFilter = meshObj.GetComponent<MeshFilter>();
             meshFilter.mesh = blockMesh;
@@ -262,7 +263,7 @@ namespace Light2D.Examples
                 .SpriteInfo.First(ti => ti != null)
                 .texture;
             var mpb = new MaterialPropertyBlock();
-            mpb.AddTexture("_MainTex", texture);
+            mpb.SetTexture("_MainTex", texture);
             meshRenderer.SetPropertyBlock(mpb);
 
             for (int x = 0; x < ChunkSize; x++)

@@ -31,7 +31,11 @@ namespace Light2D.Examples
         private void Update()
         {
             foreach (var particle in _allParticles)
-                particle.enableEmission = IsEnabled && ForcePercent >= Random.value;
+            {
+                ParticleSystem.EmissionModule emission = particle.emission;
+                emission.enabled = IsEnabled && ForcePercent >= Random.value;
+            }
+
         }
 
         private void FixedUpdate()
